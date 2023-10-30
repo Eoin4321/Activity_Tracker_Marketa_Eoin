@@ -1,109 +1,112 @@
 package Activity_Tracker_Package;
-import java.io.*;
+
+import java.io.File;
 import java.util.Scanner;
+
 public class Main {
+    public static void main(String[] args) throws Exception{
+        Scanner sc = new Scanner(new File("C:\\Users\\bilam\\Documents\\Lab Project\\Activity_Tracker_Marketa_Eoin\\src\\TestData\\activity_data_10.csv"));
+        sc.useDelimiter(",");
+
+        while(sc.hasNext())
+        {
+            System.out.print(sc.next());
+        }
+        sc.close();
+    }
+
     Activity intensity;
+    public double kilometresPerHour(int duration, double distance){
 
-        public static void main(String[] args) throws Exception
-        {
-            //parsing a CSV file into Scanner class constructor
-            System.out.println("Test");
-            Scanner sc = new Scanner(new File("src\\TestData\\activity_data_10.csv"));
-            sc.useDelimiter(",");   //sets the delimiter pattern
-            while (sc.hasNext())  //returns a boolean value
-            {
-                System.out.print(sc.next());  //find and returns the next complete token from this scanner
-            }
-            sc.close();  //closes the scanner
-
-            Activity intensity;
-
-        }
-
-    public double KilometersPerHour(int Duration,Double Distance)
-    {
-        double KilometersPerHour;
-        KilometersPerHour=Duration/Distance;
-        return KilometersPerHour;
+        double kilometresPerHour;
+        kilometresPerHour = duration/distance;
+        return kilometresPerHour;
     }
 
-    public void Intensity (double KilometersPerHour, String Type)
-    {
-        if(Type=="Swimming")
+    public void Intensity(double kilometresPerHour, String type){
+
+        if(type=="Swimming")
         {
-            if(KilometersPerHour<=0.5)
+             if(kilometresPerHour<=0.5)
+             {
+                intensity = Activity.VERY_LIGHT;
+             }
+
+             else if(kilometresPerHour<=1.25)
+             {
+                 intensity = Activity.LIGHT;
+             }
+
+             else if(kilometresPerHour<= 2)
+             {
+                 intensity = Activity.MODERATE;
+             }
+
+             else if(kilometresPerHour<= 2.75)
+             {
+                intensity = Activity.VIGOROUS;
+             }
+
+             else if(kilometresPerHour<= 2.75)
+             {
+                intensity = Activity.VERY_VIGOROUS;
+             }
+        }
+
+        else if(type=="Running")
+        {
+            if(kilometresPerHour==4)
             {
-                intensity=Activity.Very_Light;
+                intensity = Activity.VERY_LIGHT;
             }
-            else if(KilometersPerHour<=1.25)
+
+            else if(kilometresPerHour>4 && kilometresPerHour <=8)
             {
-                intensity=Activity.Light;
+                intensity = Activity.LIGHT;
             }
-            else if(KilometersPerHour<=2)
+
+            else if(kilometresPerHour>8 && kilometresPerHour <=12)
             {
-                intensity=Activity.Moderate;
+                intensity = Activity.MODERATE;
             }
-            else if(KilometersPerHour<=2.75)
+
+            else if(kilometresPerHour>12 && kilometresPerHour <=16)
             {
-                intensity=Activity.Vigorous;
+                intensity = Activity.VIGOROUS;
             }
-            else
+
+            else if(kilometresPerHour>16 && kilometresPerHour <=24)
             {
-                intensity=Activity.Very_Vigorous;
+                intensity = Activity.VERY_VIGOROUS;
             }
         }
 
-        else if(Type=="Running")
+        else if(type=="Cycling")
         {
-            if(KilometersPerHour==4)
+            if(kilometresPerHour==8)
             {
-                intensity=Activity.Very_Light;
+                intensity = Activity.VERY_LIGHT;
             }
-            else if(KilometersPerHour>4 && KilometersPerHour<=8)
-            {
-                intensity=Activity.Light;
-            }
-            else if(KilometersPerHour>8 && KilometersPerHour<=12)
-            {
-                intensity=Activity.Moderate;
-            }
-            else if(KilometersPerHour>12 && KilometersPerHour<=16)
-            {
-                intensity=Activity.Vigorous;
-            }
-            else if(KilometersPerHour>16 && KilometersPerHour<=24)
-            {
-                intensity=Activity.Very_Vigorous;
-            }
-        }
 
-        else if(Type=="Cycling")
-        {
-            if(KilometersPerHour==8)
+            else if(kilometresPerHour>8 && kilometresPerHour <=16)
             {
-                intensity=Activity.Very_Light;
+                intensity = Activity.LIGHT;
             }
-            else if(KilometersPerHour>8 && KilometersPerHour<=16)
+
+            else if(kilometresPerHour>=17 && kilometresPerHour <=25)
             {
-                intensity=Activity.Light;
+                intensity = Activity.MODERATE;
             }
-            else if(KilometersPerHour>=17 && KilometersPerHour<=125)
+
+            else if(kilometresPerHour>25 && kilometresPerHour <=33)
             {
-                intensity=Activity.Moderate;
+                intensity = Activity.VIGOROUS;
             }
-            else if(KilometersPerHour>25 && KilometersPerHour<=33)
+
+            else if(kilometresPerHour>33 && kilometresPerHour <=40)
             {
-                intensity=Activity.Vigorous;
+                intensity = Activity.VERY_VIGOROUS;
             }
-            else if(KilometersPerHour>33 && KilometersPerHour<=40)
-            {
-                intensity=Activity.Very_Vigorous;
-            }
-        }
         }
     }
-
-
-
-
-
+}

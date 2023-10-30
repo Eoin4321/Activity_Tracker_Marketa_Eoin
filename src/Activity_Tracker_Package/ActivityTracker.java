@@ -1,75 +1,76 @@
 package Activity_Tracker_Package;
 
 public class ActivityTracker {
-String Type;
-int Duration;
-String Date;
-double Distance;
-double AverageHeartRate;
-    //Default Constructor
+
+    String type;
+    int duration;
+    String date;
+    double distance;
+    double averageHearRate;
+
+    //default constructor
     public ActivityTracker() {
     }
-    //Full Constructor
 
-    public ActivityTracker(String type, int duration, String date, double distance, double averageHeartRate) {
-        Type = type;
-        Duration = duration;
-        Date = date;
-        Distance = distance;
-        AverageHeartRate = averageHeartRate;
+    //full constructor
+    public ActivityTracker(String type, int duration, String date, double distance, double averageHearRate) {
+        this.type = type;
+        this.duration = duration;
+        this.date = date;
+        this.distance = distance;
+        this.averageHearRate = averageHearRate;
     }
-    //Getters
 
+    //getters
     public String getType() {
-        return Type;
+        return type;
     }
 
     public int getDuration() {
-        return Duration;
+        return duration;
     }
 
     public String getDate() {
-        return Date;
+        return date;
     }
 
     public double getDistance() {
-        return Distance;
+        return distance;
     }
 
-    public double getAverageHeartRate() {
-        return AverageHeartRate;
+    public double getAverageHearRate() {
+        return averageHearRate;
     }
 
-    //Setters
-
+    //setter
     public void setType(String type) {
-        Type = type;
+        this.type = type;
     }
 
     public void setDuration(int duration) {
-        Duration = duration;
+        this.duration = duration;
     }
 
     public void setDate(String date) {
-        Date = date;
+        this.date = date;
     }
 
     public void setDistance(double distance) {
-        Distance = distance;
+        this.distance = distance;
     }
 
-    public void setAverageHeartRate(double averageHeartRate) {
-        AverageHeartRate = averageHeartRate;
+    public void setAverageHearRate(double averageHearRate) {
+        this.averageHearRate = averageHearRate;
     }
 
     @Override
     public String toString() {
         return "ActivityTracker{" +
-                "Type='" + Type + '\'' +
-                ", Duration=" + Duration +
-                ", Date='" + Date + '\'' +
-                ", Distance=" + Distance +
-                ", AverageHeartRate=" + AverageHeartRate +
+                "type='" + type + '\'' +
+                ", duration=" + duration +
+                ", date='" + date + '\'' +
+                ", distance=" + distance +
+                ", averageHearRate=" + averageHearRate +
                 '}';
     }
 }
