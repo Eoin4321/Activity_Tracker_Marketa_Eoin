@@ -8,6 +8,10 @@ public class Main {
     //Creating an ArrayList
     ArrayList<ActivityTracker> stats = new ArrayList<>();
 
+    public void displayMenu()
+    {
+
+    }
     public static void main(String[] args) throws Exception{
         Scanner sc = new Scanner(new File("C:\\Users\\kay\\Desktop\\OOPAssignment1\\Activity_Tracker\\src\\TestData\\activity_data_10.csv"));
         sc.useDelimiter(",");
@@ -44,6 +48,42 @@ public class Main {
         kilometresPerHour = duration/distance;
         return kilometresPerHour;
     }
+
+    public static void fileReader() throws Exception {
+        String filename;
+        System.out.println("Please type in the file you want to read from.");
+
+
+
+        Scanner sc = new Scanner(new File("C:\\Users\\kay\\Desktop\\OOPAssignment1\\Activity_Tracker\\src\\TestData\\activity_data_10.csv"));
+        sc.useDelimiter(",");
+        String type;
+        int duration;
+        String date;
+        double distance;
+        double averageHeartRate;
+        String value;
+
+        System.out.println(sc.nextLine());
+        while(sc.hasNext())
+        {
+            type=sc.next().trim();
+            date=sc.next().trim();
+            value=sc.next().trim();
+            duration=Integer.parseInt(value);
+            System.out.println("duration added"+duration);
+            value=sc.next().trim();
+            distance=Double.parseDouble(value);
+            System.out.println("Distance value added "+distance);
+            value=sc.nextLine().trim().substring(1);
+            averageHeartRate=Double.parseDouble(value);
+            System.out.println("\nType = "+type+"\nDuration = "+duration+"\nDate = "+date+"\nDistance = "+distance+"\nAverageHeartRate = "+averageHeartRate);
+
+        }
+        sc.close();
+    }
+
+
 
     public void Intensity(double kilometresPerHour, String type){
 
