@@ -8,38 +8,17 @@ public class Main {
     //Creating an ArrayList
     ArrayList<ActivityTracker> stats = new ArrayList<>();
 
-    public void displayMenu()
-    {
+    public static void main(String[] args) throws Exception {
+        //Creating an ArrayList to store the users statistics.
+        ArrayList<ActivityTracker> stats = new ArrayList<>();
+        //Welcome Text
+        System.out.println("Welcome to the activity tracker. Please enter the file you would like to read from(You can read more files later)");
+        //Calling Methods
+        fileReader(stats);
+        //displayMenu(stats);
 
     }
-    public static void main(String[] args) throws Exception{
-        Scanner sc = new Scanner(new File("C:\\Users\\kay\\Desktop\\OOPAssignment1\\Activity_Tracker\\src\\TestData\\activity_data_10.csv"));
-        sc.useDelimiter(",");
-        String type;
-        int duration;
-        String date;
-        double distance;
-        double averageHeartRate;
-        String value;
 
-        System.out.println(sc.nextLine());
-        while(sc.hasNext())
-        {
-            type=sc.next().trim();
-            date=sc.next().trim();
-            value=sc.next().trim();
-            duration=Integer.parseInt(value);
-            System.out.println("duration added"+duration);
-            value=sc.next().trim();
-            distance=Double.parseDouble(value);
-            System.out.println("Distance value added "+distance);
-            value=sc.nextLine().trim().substring(1);
-            averageHeartRate=Double.parseDouble(value);
-            System.out.println("\nType = "+type+"\nDuration = "+duration+"\nDate = "+date+"\nDistance = "+distance+"\nAverageHeartRate = "+averageHeartRate);
-
-        }
-        sc.close();
-    }
 
     Activity intensity;
     public double kilometresPerHour(int duration, double distance){
@@ -82,8 +61,6 @@ public class Main {
         }
         sc.close();
     }
-
-
 
     public void Intensity(double kilometresPerHour, String type){
 
@@ -130,5 +107,30 @@ public class Main {
         }
     }
 
+//menu method
+    public void displayMenu(int menuNum,  ArrayList<ActivityTracker> stats) throws Exception{
+        Scanner keyboard = new Scanner(System.in);
 
+//the menu
+        System.out.println("Welcome!");
+        System.out.println("Menu");
+        System.out.println("1) View files\n");
+        System.out.println("2) Upload files");
+        System.out.println("(to navigate around the meu please type in number)");
+
+//if user types in 1 it will bring them to the viewFile method to view the files
+        if(menuNum == 1){
+            viewFile();
+        }
+
+//if 2 it will bring them to the fileReader where the user can upload a new file
+        else if(menuNum == 2){
+            fileReader(stats);
+        }
+    }
+
+//viewing file method
+    public static void viewFile(){
+        System.out.println("Which file would you like to view?");
+    }
 }
