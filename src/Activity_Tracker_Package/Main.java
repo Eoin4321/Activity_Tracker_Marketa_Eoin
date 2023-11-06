@@ -1,5 +1,5 @@
 package Activity_Tracker_Package;
-
+//Importing
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -28,13 +28,16 @@ public class Main {
         return kilometresPerHour;
     }
 
-    public static void fileReader() throws Exception {
+    public static void fileReader( ArrayList<ActivityTracker> stats ) throws Exception {
+        //Creating a scanner type keyboard called keyboard.
+        Scanner keyboard = new Scanner(System.in);
+        //Creating Variable to use to direct to the filepath
         String filename;
-        System.out.println("Please type in the file you want to read from.");
 
-
-
-        Scanner sc = new Scanner(new File("C:\\Users\\kay\\Desktop\\OOPAssignment1\\Activity_Tracker\\src\\TestData\\activity_data_10.csv"));
+        System.out.println("Please type in the file location for the file you would to read.(Only type in the relative path and don't include .csv) ");
+        //Setting the filename String to the users input.
+        filename=keyboard.next();
+        Scanner sc = new Scanner("src/TestData/"+new File(filename)+".csv");
         sc.useDelimiter(",");
         String type;
         int duration;
@@ -42,8 +45,10 @@ public class Main {
         double distance;
         double averageHeartRate;
         String value;
-
+        //Removing the stat labels at the top
         System.out.println(sc.nextLine());
+        //Creating an ArrayList to store the new data
+        ArrayList<ActivityTracker> newData = new ArrayList<>();
         while(sc.hasNext())
         {
             type=sc.next().trim();
@@ -58,7 +63,14 @@ public class Main {
             averageHeartRate=Double.parseDouble(value);
             System.out.println("\nType = "+type+"\nDuration = "+duration+"\nDate = "+date+"\nDistance = "+distance+"\nAverageHeartRate = "+averageHeartRate);
 
+
+            //For loop to check for dublicates
         }
+
+
+
+
+
         sc.close();
     }
 
