@@ -1,6 +1,6 @@
 package Activity_Tracker_Package;
 //Importing
-import java.io.File;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -73,53 +73,7 @@ public class Main {
 
         sc.close();
     }
-
-    public void Intensity(double kilometresPerHour, String type){
-
-        switch (type) {
-            case "Swimming" -> {
-                if (kilometresPerHour <= 0.5) {
-                    intensity = Activity.VERY_LIGHT;
-                } else if (kilometresPerHour <= 1.25) {
-                    intensity = Activity.LIGHT;
-                } else if (kilometresPerHour <= 2) {
-                    intensity = Activity.MODERATE;
-                } else if (kilometresPerHour <= 2.75) {
-                    intensity = Activity.VIGOROUS;
-                } else if (kilometresPerHour <= 2.75) {
-                    intensity = Activity.VERY_VIGOROUS;
-                }
-            }
-            case "Running" -> {
-                if (kilometresPerHour == 4) {
-                    intensity = Activity.VERY_LIGHT;
-                } else if (kilometresPerHour > 4 && kilometresPerHour <= 8) {
-                    intensity = Activity.LIGHT;
-                } else if (kilometresPerHour > 8 && kilometresPerHour <= 12) {
-                    intensity = Activity.MODERATE;
-                } else if (kilometresPerHour > 12 && kilometresPerHour <= 16) {
-                    intensity = Activity.VIGOROUS;
-                } else if (kilometresPerHour > 16 && kilometresPerHour <= 24) {
-                    intensity = Activity.VERY_VIGOROUS;
-                }
-            }
-            case "Cycling" -> {
-                if (kilometresPerHour == 8) {
-                    intensity = Activity.VERY_LIGHT;
-                } else if (kilometresPerHour > 8 && kilometresPerHour <= 16) {
-                    intensity = Activity.LIGHT;
-                } else if (kilometresPerHour >= 17 && kilometresPerHour <= 25) {
-                    intensity = Activity.MODERATE;
-                } else if (kilometresPerHour > 25 && kilometresPerHour <= 33) {
-                    intensity = Activity.VIGOROUS;
-                } else if (kilometresPerHour > 33 && kilometresPerHour <= 40) {
-                    intensity = Activity.VERY_VIGOROUS;
-                }
-            }
-        }
-    }
-
-//menu method
+    //menu method
     public void displayMenu(int menuNum,  ArrayList<ActivityTracker> stats) throws Exception{
         Scanner keyboard = new Scanner(System.in);
 
@@ -141,8 +95,83 @@ public class Main {
         }
     }
 
-//viewing file method
+    //viewing file method - an array list of how many files the user uploaded
     public static void viewFile(){
-        System.out.println("Which file would you like to view?");
+        Scanner keyboard = new Scanner(System.in);
+        String answer;
+
+        System.out.println("Loading...");
+        //view the file by default
+        System.out.println("How do you want to view the file?");
+        System.out.println("1) Default\n");
+        System.out.println("2) Subset\n");
+        System.out.println("3) Overall Performance");
+        answer=keyboard.nextLine();
+
+        if(answer == "1"){
+            defaultView();
+        }
+
+        else if(answer == "2"){
+            subsetView();
+        }
+
+        else if(answer == "3"){
+            overallView();
+        }
+
+    }
+
+    public static void defaultView(){
+        Scanner keyboard = new Scanner(System.in);
+        String answer;
+
+        System.out.println("1) Calories Burned\n" +
+                "2) Date\n" +
+                "3) Activity duration\n" +
+                "4) Type of activity\n" +
+                "5) Distance\n");
+
+        answer=keyboard.nextLine();
+
+        if(answer == "1"){
+            caloriesBurned();
+        }
+        else if(answer == "2"){
+            date();
+        }
+        else if(answer == "3"){
+            activityDuration();
+        }
+        else if(answer == "4"){
+            activityType();
+        }
+        else if(answer == "5"){
+            distance();
+        }
+
+    }
+
+    public static void subsetView(){
+        Scanner keyboard = new Scanner(System.in);
+        String answer;
+
+        System.out.println("1) Activity type\n" +
+                "2) Above a minimum distance\n" +
+                "3) Type of energy expended\n" +
+                "4) Above a minimum duration");
+    }
+
+    public static void overallView(){
+        Scanner keyboard = new Scanner(System.in);
+        String answer;
+
+        System.out.println("1) Average distance per activity\n" +
+                "2) Average calories burned");
+    }
+
+
+    public static void caloriesBurned(){
+
     }
 }
