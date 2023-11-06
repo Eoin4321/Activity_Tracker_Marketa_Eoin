@@ -6,7 +6,7 @@ public class ActivityTracker {
     int duration;
     String date;
     double distance;
-    double averageHearRate;
+    double averageHeartRate;
 
     //default constructor
     public ActivityTracker() {
@@ -18,7 +18,7 @@ public class ActivityTracker {
         this.duration = duration;
         this.date = date;
         this.distance = distance;
-        this.averageHearRate = averageHearRate;
+        this.averageHeartRate = averageHearRate;
     }
 
     //getters
@@ -39,7 +39,7 @@ public class ActivityTracker {
     }
 
     public double getAverageHearRate() {
-        return averageHearRate;
+        return averageHeartRate;
     }
 
     //setter
@@ -60,7 +60,7 @@ public class ActivityTracker {
     }
 
     public void setAverageHearRate(double averageHearRate) {
-        this.averageHearRate = averageHearRate;
+        this.averageHeartRate = averageHearRate;
     }
 
     @Override
@@ -70,7 +70,7 @@ public class ActivityTracker {
                 ", duration=" + duration +
                 ", date='" + date + '\'' +
                 ", distance=" + distance +
-                ", averageHearRate=" + averageHearRate +
+                ", averageHearRate=" + averageHeartRate +
                 '}';
     }
 }
