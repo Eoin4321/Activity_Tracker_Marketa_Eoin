@@ -11,7 +11,6 @@ public class Main {
     public static void main(String[] args) throws Exception{
         Scanner sc = new Scanner(new File("C:\\Users\\kay\\Desktop\\OOPAssignment1\\Activity_Tracker\\src\\TestData\\activity_data_10.csv"));
         sc.useDelimiter(",");
-
         String type;
         int duration;
         String date;
@@ -22,22 +21,17 @@ public class Main {
         System.out.println(sc.nextLine());
         while(sc.hasNext())
         {
-
-            type=sc.next();
-            date=sc.next();
-            value=sc.next();
-            duration=Integer.parseInt(value.substring(SpaceCount(value)));
+            type=sc.next().trim();
+            date=sc.next().trim();
+            value=sc.next().trim();
+            duration=Integer.parseInt(value);
             System.out.println("duration added"+duration);
-
-            value=sc.next();
-            distance=Double.parseDouble(value.substring(SpaceCount(value)));
+            value=sc.next().trim();
+            distance=Double.parseDouble(value);
             System.out.println("Distance value added "+distance);
-
-            value=sc.nextLine().substring(1);
-            System.out.println("Current value before error "+value);
-            averageHeartRate=Integer.parseInt(value.substring(SpaceCount(value)));
-
-            System.out.println("\nTYPE = "+type+"\nDuration = "+duration+"\nDate = "+date+"\nTYPE = "+distance+"\nTYPE = "+averageHeartRate);
+            value=sc.nextLine().trim().substring(1);
+            averageHeartRate=Double.parseDouble(value);
+            System.out.println("\nType = "+type+"\nDuration = "+duration+"\nDate = "+date+"\nDistance = "+distance+"\nAverageHeartRate = "+averageHeartRate);
 
         }
         sc.close();
@@ -96,15 +90,5 @@ public class Main {
         }
     }
 
-    public static int SpaceCount(String value)
-    {
-        int spaceCount=0;
-        for (int i = 0; i < value.length(); i++) {
-            // Check if the character at the current index is a space
-            if (value.charAt(i) == ' ') {
-                spaceCount++;
-            }
-        }
-        return spaceCount;
-    }
+
 }
