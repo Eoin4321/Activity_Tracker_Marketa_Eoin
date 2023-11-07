@@ -171,7 +171,123 @@ public class Main {
     }
 
 
-    public static void caloriesBurned(){
+    public static void caloriesBurned(int duration, int kilometresPerHour){
+        Scanner keyboard = new Scanner(System.in);
+        String answer;
+        String activity;
+
+        double caloriesBurned;
+        caloriesBurned = duration*kilometresPerHour;
+
+        //based on what should they view it? activity? - probs
+        System.out.println("Based on what activity do you want to see: Calories Burned?");
+        answer=keyboard.nextLine();
+
+        if(answer == "Swimming")
+            {
+
+                //get only the swimming column (get)
+
+                //sorts in ascending order
+                // Arrays.sort(ARRAY NAME);
+
+                //sorts in reverse order
+                // reverse(ARRAY NAME);
+            }
+        else if(answer == "Cycling")
+            {
+
+            }
+
+        else if(answer == "Running")
+            {
+
+            }
+
+        else
+            {
+
+            }
+
+    }
+
+    public static void date(){
+        Scanner keyboard = new Scanner(System.in);
+        String answer;
+
+        //based on what should they view it? activity? - probs
+        System.out.println("Based on what activity do you want to see: Date?");
+        answer=keyboard.nextLine();
+
+        if(answer == "Swimming")
+        {
+
+            //get only the swimming column (get)
+
+            //sorts in ascending order
+            // Arrays.sort(ARRAY NAME);
+
+            //sorts in reverse order
+            // reverse(ARRAY NAME);
+
+            String input;
+            System.out.println("View in: 1) Ascending  OR   2)Descending order");
+            input = keyboard.nextLine();
+
+            if(input == "1" || input =="Ascending")
+                {
+                    // Arrays.sort(ARRAY NAME);
+                    //sout the array
+                }
+
+            else if (input == "2" || input == "Descending")
+                {
+                    // Arrays.sort(ARRAY NAME);
+                    // reverse(ARRAY NAME);
+                    //sout the array
+                }
+        }
+
+        else if(answer == "Cycling")
+        {
+            String input;
+            System.out.println("View in: 1) Ascending  OR   2)Descending order");
+            input = keyboard.nextLine();
+
+            if(input == "1" || input =="Ascending")
+            {
+                // Arrays.sort(ARRAY NAME);
+                //sout the array
+            }
+
+            else if (input == "2" || input == "Descending")
+            {
+                // Arrays.sort(ARRAY NAME);
+                // reverse(ARRAY NAME);
+                //sout the array
+            }
+        }
+
+        else if(answer == "Running")
+        {
+            String input;
+            System.out.println("View in: 1) Ascending  OR   2)Descending order");
+            input = keyboard.nextLine();
+
+            if(input == "1" || input =="Ascending")
+            {
+                // Arrays.sort(ARRAY NAME);
+                //sout the array
+            }
+
+            else if (input == "2" || input == "Descending")
+            {
+                // Arrays.sort(ARRAY NAME);
+                // reverse(ARRAY NAME);
+                //sout the array
+            }
+        }
+
 
     }
 }
