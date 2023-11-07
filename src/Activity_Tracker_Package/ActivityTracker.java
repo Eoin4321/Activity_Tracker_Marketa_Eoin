@@ -10,8 +10,10 @@ public class ActivityTracker {
     String date;
     //the distance traveled
     double distance;
-   //their average heart rate
+    //their average heart rate
     double averageHeartRate;
+    //Intensity
+    Intensity intensity;
 
     //default constructor
     public ActivityTracker() {
@@ -24,6 +26,8 @@ public class ActivityTracker {
         this.date = date;
         this.distance = distance;
         this.averageHeartRate = averageHearRate;
+        intensity = calcintensity();
+
     }
 
     //getters
@@ -70,51 +74,61 @@ public class ActivityTracker {
 
 
     //intensity method bsed on activity
-    public void intensity(double kilometresPerHour, String type, Activity intensity){
-
+    public Intensity calcintensity() {
+        double kilometresPerHour;
+        kilometresPerHour = duration / distance;
         //switch statement for every activity and intensity based on enum
         switch (type) {
             case "Swimming" -> {
                 if (kilometresPerHour <= 0.5) {
-                    intensity = Activity.VERY_LIGHT;
+                    intensity = intensity.VERY_LIGHT;
                 } else if (kilometresPerHour <= 1.25) {
-                    intensity = Activity.LIGHT;
+                    intensity = intensity.LIGHT;
                 } else if (kilometresPerHour <= 2) {
-                    intensity = Activity.MODERATE;
+                    intensity = intensity.MODERATE;
                 } else if (kilometresPerHour <= 2.75) {
-                    intensity = Activity.VIGOROUS;
+                    intensity = intensity.VIGOROUS;
                 } else if (kilometresPerHour <= 2.75) {
-                    intensity = Activity.VERY_VIGOROUS;
+                    intensity = intensity.VERY_VIGOROUS;
                 }
+                break;
             }
             case "Running" -> {
                 if (kilometresPerHour == 4) {
-                    intensity = Activity.VERY_LIGHT;
+                    intensity = intensity.VERY_LIGHT;
                 } else if (kilometresPerHour > 4 && kilometresPerHour <= 8) {
-                    intensity = Activity.LIGHT;
+                    intensity = intensity.LIGHT;
                 } else if (kilometresPerHour > 8 && kilometresPerHour <= 12) {
-                    intensity = Activity.MODERATE;
+                    intensity = intensity.MODERATE;
                 } else if (kilometresPerHour > 12 && kilometresPerHour <= 16) {
-                    intensity = Activity.VIGOROUS;
+                    intensity = intensity.VIGOROUS;
                 } else if (kilometresPerHour > 16 && kilometresPerHour <= 24) {
-                    intensity = Activity.VERY_VIGOROUS;
+                    intensity = intensity.VERY_VIGOROUS;
                 }
+                break;
             }
             case "Cycling" -> {
                 if (kilometresPerHour == 8) {
-                    intensity = Activity.VERY_LIGHT;
+                    intensity = intensity.VERY_LIGHT;
                 } else if (kilometresPerHour > 8 && kilometresPerHour <= 16) {
-                    intensity = Activity.LIGHT;
+                    intensity = intensity.LIGHT;
                 } else if (kilometresPerHour >= 17 && kilometresPerHour <= 25) {
-                    intensity = Activity.MODERATE;
+                    intensity = intensity.MODERATE;
                 } else if (kilometresPerHour > 25 && kilometresPerHour <= 33) {
-                    intensity = Activity.VIGOROUS;
+                    intensity = intensity.VIGOROUS;
                 } else if (kilometresPerHour > 33 && kilometresPerHour <= 40) {
-                    intensity = Activity.VERY_VIGOROUS;
+                    intensity = intensity.VERY_VIGOROUS;
                 }
+                break;
             }
         }
+
+        {
+            return null;
+        }
     }
+
+
 
     //toString method
     @Override
@@ -125,6 +139,7 @@ public class ActivityTracker {
                 ", date='" + date + '\'' +
                 ", distance=" + distance +
                 ", averageHearRate=" + averageHeartRate +
+                ", intensity=" + intensity +
                 '}';
     }
 }

@@ -1,22 +1,21 @@
 package Activity_Tracker_Package;
 //Importing
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    //Creating an ArrayList
-    ArrayList<ActivityTracker> stats = new ArrayList<>();
-
-    public static void main(String[] args) throws Exception {
-        //Creating an ArrayList to store the users statistics.
-        ArrayList<ActivityTracker> stats = new ArrayList<>();
-        //Welcome Text
-        System.out.println("Welcome to the activity tracker. Please enter the file you would like to read from(You can read more files later)");
-        //Calling Methods
-        fileReader(stats);
-        //displayMenu(stats);
-
+    //creating our ArrayList for ActivityTracker Objects
+    public static ArrayList<ActivityTracker> stats = new ArrayList<ActivityTracker>();
+    public static void main(String[] args) {
+        //Running the file reader method when the program starts.
+        try {
+            fileReader();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println(stats);
     }
     //File Reader Method
     public static void fileReader() throws Exception {
@@ -55,19 +54,16 @@ public class Main {
     //menu method
     public void displayMenu(int menuNum, ArrayList<ActivityTracker> stats) throws Exception {
         Scanner keyboard = new Scanner(System.in);
-
 //the menu
         System.out.println("Welcome!");
         System.out.println("Menu");
         System.out.println("1) View files\n");
         System.out.println("2) Upload files");
-        System.out.println("(to navigate around the meu please type in number)");
-
+        System.out.println("(to navigate around the menu please type in number)");
 //if user types in 1 it will bring them to the viewFile method to view the files
         if (menuNum == 1) {
             viewFile();
         }
-
 //if 2 it will bring them to the fileReader where the user can upload a new file
         else if (menuNum == 2) {
             fileReader();
@@ -77,7 +73,6 @@ public class Main {
     public static void viewFile() {
         Scanner keyboard = new Scanner(System.in);
         String answer;
-
         System.out.println("Loading...");
         //view the file by default
         System.out.println("How do you want to view the file?");
@@ -93,13 +88,11 @@ public class Main {
         } else if (answer == "3") {
             overallView();
         }
-
     }
 
     public static void defaultView() {
         Scanner keyboard = new Scanner(System.in);
         String answer;
-
         System.out.println("1) Calories Burned\n" +
                 "2) Date\n" +
                 "3) Activity duration\n" +
@@ -158,7 +151,6 @@ public class Main {
         Scanner keyboard = new Scanner(System.in);
         String answer;
         String activity;
-
         double caloriesBurned;
         caloriesBurned = duration * kilometresPerHour;
         //based on what should they view it? activity? - probs
