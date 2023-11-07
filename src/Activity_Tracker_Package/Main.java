@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class Main {
     //creating our ArrayList for ActivityTracker Objects
     public static ArrayList<ActivityTracker> stats = new ArrayList<ActivityTracker>();
+
     public static void main(String[] args) {
         //Running the file reader method when the program starts.
         try {
@@ -17,15 +18,16 @@ public class Main {
         }
         System.out.println(stats);
     }
+
     //File Reader Method
     public static void fileReader() throws Exception {
         Scanner keyboard = new Scanner(System.in);
         //Creating a string called filename which the user will input the name of the file into
         String filename;
-        filename= keyboard.next();
+        filename = keyboard.next();
         System.out.println("Please type in the file you want to read from.");
         //Chosing the file the user inputed
-        Scanner sc = new Scanner(new File("src\\TestData\\"+filename+".csv"));
+        Scanner sc = new Scanner(new File("src\\TestData\\" + filename + ".csv"));
         sc.useDelimiter(",");
         String type;
         int duration;
@@ -34,23 +36,23 @@ public class Main {
         double averageHeartRate;
         String value;
         System.out.println(sc.nextLine());
-        while(sc.hasNext())
-        {
-            type=sc.next().trim();
-            date=sc.next().trim();
-            value=sc.next().trim();
-            duration=Integer.parseInt(value);
-            value=sc.next().trim();
-            distance=Double.parseDouble(value);
-            value=sc.nextLine().trim().substring(1);
-            averageHeartRate=Double.parseDouble(value);
+        while (sc.hasNext()) {
+            type = sc.next().trim();
+            date = sc.next().trim();
+            value = sc.next().trim();
+            duration = Integer.parseInt(value);
+            value = sc.next().trim();
+            distance = Double.parseDouble(value);
+            value = sc.nextLine().trim().substring(1);
+            averageHeartRate = Double.parseDouble(value);
             ActivityTracker newActivity = new ActivityTracker(type, duration, date, distance, averageHeartRate);
-            if(!stats.contains(newActivity)){
+            if (!stats.contains(newActivity)) {
                 stats.add(newActivity);
             }
         }
         sc.close();
     }
+
     //menu method
     public void displayMenu(int menuNum, ArrayList<ActivityTracker> stats) throws Exception {
         Scanner keyboard = new Scanner(System.in);
@@ -69,6 +71,7 @@ public class Main {
             fileReader();
         }
     }
+
     //viewing file method - an array list of how many files the user uploaded
     public static void viewFile() {
         Scanner keyboard = new Scanner(System.in);
@@ -129,11 +132,11 @@ public class Main {
         if (answer == "1") {
             activityType();
         } else if (answer == "2") {
-           // aboveMinimumDistance();
+            aboveMinimumDistance();
         } else if (answer == "3") {
             energyExpended();
         } else if (answer == "4") {
-            //aboveMinimumDuration();
+            aboveMinimumDuration();
 
         }
     }
@@ -366,36 +369,31 @@ public class Main {
             //get only the swimming column (get)
             //printout
 
-        }
+        } else if (answer == "Running") {
 
-        else if(answer == "Running"){
-
-        }
-
-        else if(answer == "Cycling"){
+        } else if (answer == "Cycling") {
 
         }
     }
 
-    public static void aboveMinimumDistance(ArrayList<ActivityTracker> stats){
+    public static void aboveMinimumDistance(ArrayList<ActivityTracker> stats) {
         Scanner keyboard = new Scanner(System.in);
-       // Collections.sort(stats);
+        // Collections.sort(stats);
         int minDistance = Integer.MAX_VALUE;
 
         System.out.println("What's your minimum distance requirement?");
         minDistance = keyboard.nextInt();
 
-       for(int i=1; i<stats.size();i++)
-       {
-            if(minDistance>stats.get(i).distance)
-                {
-                    System.out.println(stats.toString());
-                }
-       }
+        for (int i = 1; i < stats.size(); i++) {
+            if (minDistance > stats.get(i).distance) {
+                //remove the activity, update the arraylist(?) and print it out
+                System.out.println(stats.toString());
+            }
+        }
 
     }
 
-    public static void energyExpended(){
+    public static void energyExpended() {
         Scanner keyboard = new Scanner(System.in);
 
         String gender;
@@ -413,51 +411,41 @@ public class Main {
         System.out.println("How much do you weight?");
         weight = keyboard.nextDouble();
 
-        if(gender=="Male" || gender=="a")
-            {
-                if(age>=18&&age<=29)
-                    {
-                        bmr = (0.063*weight+2.896)*238.85;
-                    }
-
-                else if(age>=30&&age<=59)
-                    {
-                        bmr = (0.048*weight+3.653)*238.85;
-                    }
-
-                else if(age>=60&&age<=74)
-                    {
-                        bmr = (0.0499*weight+2.930)*238.85;
-                    }
+        if (gender == "Male" || gender == "a") {
+            if (age >= 18 && age <= 29) {
+                bmr = (0.063 * weight + 2.896) * 238.85;
+            } else if (age >= 30 && age <= 59) {
+                bmr = (0.048 * weight + 3.653) * 238.85;
+            } else if (age >= 60 && age <= 74) {
+                bmr = (0.0499 * weight + 2.930) * 238.85;
             }
-
-        else if(gender=="Female" || gender == "b")
-            {
-                if(gender=="Male" || gender=="a")
-                    {
-                        bmr=(0.062*weight+2.036)*238.85;
-                    }
-
-                else if(age>=30&&age<=59)
-                    {
-                       bmr = (0.034*weight*3.538)*238.85;
-                    }
-
-                else if(age>=60&&age<=74)
-                {
-                    bmr = (0.0386*weight+2.875)*238.85;
-                }
+        } else if (gender == "Female" || gender == "b") {
+            if (gender == "Female" || gender == "b") {
+                bmr = (0.062 * weight + 2.036) * 238.85;
+            } else if (age >= 30 && age <= 59) {
+                bmr = (0.034 * weight * 3.538) * 238.85;
+            } else if (age >= 60 && age <= 74) {
+                bmr = (0.0386 * weight + 2.875) * 238.85;
             }
+        }
 
-        System.out.printf("The total energy expenditure is: "+bmr+" kcal.");
+        System.out.printf("The total energy expenditure is: " + bmr + " kcal.");
     }
 
-    public static void aboveMinimumDuration(ArrayList<ActivityTracker> stats){
+    public static void aboveMinimumDuration(ArrayList<ActivityTracker> stats) {
         Scanner keyboard = new Scanner(System.in);
-        // Collections.sort(stats);
-        int minDistance = Integer.MAX_VALUE;
+        int minDuration = Integer.MAX_VALUE;
 
-        System.out.println("What's your minimum distance requirement?");
-        minDistance = keyboard.nextInt();
+        System.out.println("What's your minimum duration requirement?");
+        minDuration = keyboard.nextInt();
+
+        for (int i = 1; i < stats.size(); i++)
+            {
+            if (minDuration >= stats.get(i).duration)
+                {
+                    //remove the activity, update the arraylist(?) and print it out
+                    System.out.println(stats.toString());
+                }
+            }
     }
 }
