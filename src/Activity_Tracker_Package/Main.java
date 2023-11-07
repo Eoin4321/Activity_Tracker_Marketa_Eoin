@@ -129,11 +129,11 @@ public class Main {
         if (answer == "1") {
             activityType();
         } else if (answer == "2") {
-            //aboveMinimumDistance();
+           // aboveMinimumDistance();
         } else if (answer == "3") {
             energyExpended();
         } else if (answer == "4") {
-            aboveMinimumDuration();
+            //aboveMinimumDuration();
 
         }
     }
@@ -401,7 +401,7 @@ public class Main {
         String gender;
         int age;
         double weight;
-        double bmr;
+        double bmr = 0;
 
         System.out.println("What gender are you?");
         System.out.println("a) Male     OR      b) Female");
@@ -449,10 +449,15 @@ public class Main {
                 }
             }
 
-        System.out.println("The total energy expenditure is: "+bmr+" kcal.");
+        System.out.printf("The total energy expenditure is: "+bmr+" kcal.");
     }
 
-    public static void aboveMinimumDuration(){
+    public static void aboveMinimumDuration(ArrayList<ActivityTracker> stats){
+        Scanner keyboard = new Scanner(System.in);
+        // Collections.sort(stats);
+        int minDistance = Integer.MAX_VALUE;
 
+        System.out.println("What's your minimum distance requirement?");
+        minDistance = keyboard.nextInt();
     }
 }
