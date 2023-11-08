@@ -30,15 +30,41 @@ public class Main {
     static class ActivityTrackerComparator implements Comparator<ActivityTracker> {
         @Override
         public int compare(ActivityTracker a, ActivityTracker b) {
-            // Sort in reverse order based on caloriesBurned
+            // Sort in descending order based on caloriesBurned
             return Double.compare(b.caloriesBurned(), a.caloriesBurned());
+        }
+    }
+
+    static class ActivityTrackerComparator2 implements Comparator<ActivityTracker> {
+        @Override
+        public int compare(ActivityTracker a, ActivityTracker b) {
+            // Sort in descending order based on caloriesBurned
+            return Double.compare(b.getDuration(), a.getDuration());
+        }
+    }
+
+
+    static class ActivityTrackerComparator3 implements Comparator<ActivityTracker> {
+        @Override
+        public int compare(ActivityTracker a, ActivityTracker b) {
+            // Sort in descending order based on date
+            return CharSequence.compare(b.getDate(), a.getDate());
         }
     }
 
     public static void caloriesBurned()  {
 
-        // Sort the ArrayList in reverse order based on caloriesBurned
+        // Sort the ArrayList in descending order based on caloriesBurned
         Collections.sort(stats, new Main.ActivityTrackerComparator());
+    }
 
+    public static void sortduration()  {
+        // Sort the ArrayList in descending order based on caloriesBurned
+        Collections.sort(stats, new Main.ActivityTrackerComparator2());
+    }
+
+    public static void sortdates()  {
+        // Sort the ArrayList in descending order based on caloriesBurned
+        Collections.sort(stats, new Main.ActivityTrackerComparator3());
     }
 }

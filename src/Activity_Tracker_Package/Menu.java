@@ -85,8 +85,6 @@ public class Menu {
 
         if (answer == 1) {
             defaultView();
-        } else if (answer == 2) {
-            subsetView();
         } else if (answer == 3) {
             overallView();
         }
@@ -105,9 +103,9 @@ public class Menu {
             System.out.println("Running CaloriesBurned Method");
             Main.caloriesBurned();
         } else if (answer == 2) {
-            date();
+            Main.sortdates();
         } else if (answer == 3) {
-            activityDuration();
+            Main.sortduration();
         } else if (answer == 4) {
             AlphabeticallyType();
         } else if (answer == 5) {
