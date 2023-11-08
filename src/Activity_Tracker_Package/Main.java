@@ -3,29 +3,34 @@ package Activity_Tracker_Package;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
+import java.util.Comparator;
 
 public class Main {
+
     //creating our ArrayList for ActivityTracker Objects
     public static ArrayList<ActivityTracker> stats = new ArrayList<ActivityTracker>();
 
     public static void main(String[] args) {
         //Running the file reader method when the program starts.
+        System.out.println("Welcome to the Activity Tracker!");
         try {
             fileReader();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
         System.out.println(stats);
+
     }
 
     //File Reader Method
     public static void fileReader() throws Exception {
+        System.out.println("Please enter the name of the file you would like to add!");
         Scanner keyboard = new Scanner(System.in);
         //Creating a string called filename which the user will input the name of the file into
         String filename;
         filename = keyboard.next();
-        System.out.println("Please type in the file you want to read from.");
         //Chosing the file the user inputed
         Scanner sc = new Scanner(new File("src\\TestData\\" + filename + ".csv"));
         sc.useDelimiter(",");
@@ -45,16 +50,22 @@ public class Main {
             distance = Double.parseDouble(value);
             value = sc.nextLine().trim().substring(1);
             averageHeartRate = Double.parseDouble(value);
-            ActivityTracker newActivity = new ActivityTracker(type, duration, date, distance, averageHeartRate);
-            if (!stats.contains(newActivity)) {
-                stats.add(newActivity);
-            }
+
+            // Add the newActivity object to the stats ArrayList
+            stats.add(new ActivityTracker(type, duration, date, distance, averageHeartRate));
+            System.out.println("PRINT STATS"+stats);
+//            if (!stats.contains(newActivity)) {
+//                stats.add(newActivity);
+//            }
         }
+        System.out.println(stats);
         sc.close();
+        displayMenu();
     }
 
     //menu method
-    public void displayMenu(int menuNum, ArrayList<ActivityTracker> stats) throws Exception {
+    public static void displayMenu() {
+        int menuNum;
         Scanner keyboard = new Scanner(System.in);
 //the menu
         System.out.println("Welcome!");
@@ -62,84 +73,135 @@ public class Main {
         System.out.println("1) View files\n");
         System.out.println("2) Upload files");
         System.out.println("(to navigate around the menu please type in number)");
+        menuNum= keyboard.nextInt();
 //if user types in 1 it will bring them to the viewFile method to view the files
         if (menuNum == 1) {
             viewFile();
         }
 //if 2 it will bring them to the fileReader where the user can upload a new file
         else if (menuNum == 2) {
-            fileReader();
+            try {
+                fileReader();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
     //viewing file method - an array list of how many files the user uploaded
     public static void viewFile() {
         Scanner keyboard = new Scanner(System.in);
-        String answer;
+        int answer;
         System.out.println("Loading...");
         //view the file by default
         System.out.println("How do you want to view the file?");
         System.out.println("1) Default\n");
-        System.out.println("2) Subset\n");
         System.out.println("3) Overall Performance");
-        answer = keyboard.nextLine();
+        answer = keyboard.nextInt();
 
-        if (answer == "1") {
+        if (answer == 1) {
             defaultView();
-        } else if (answer == "2") {
+        } else if (answer == 2) {
             subsetView();
-        } else if (answer == "3") {
+        } else if (answer == 3) {
             overallView();
         }
     }
 
     public static void defaultView() {
         Scanner keyboard = new Scanner(System.in);
-        String answer;
+        int answer;
         System.out.println("1) Calories Burned\n" +
                 "2) Date\n" +
                 "3) Activity duration\n" +
                 "4) Type of activity\n" +
                 "5) Distance\n");
-
-        answer = keyboard.nextLine();
-
-        if (answer == "1") {
-            //caloriesBurned();
-        } else if (answer == "2") {
+        answer = keyboard.nextInt();
+        if (answer == 1) {
+            System.out.println("Running CaloriesBurned Method");
+            caloriesBurned();
+        } else if (answer == 2) {
             date();
-        } else if (answer == "3") {
+        } else if (answer == 3) {
             activityDuration();
-        } else if (answer == "4") {
+        } else if (answer == 4) {
             activityType();
-        } else if (answer == "5") {
+        } else if (answer == 5) {
             distance();
         }
-
+        System.out.println("TEST Entering SubsetView");
+    subsetView();
     }
 
+    //SUBSET VIEWS
     public static void subsetView() {
         Scanner keyboard = new Scanner(System.in);
-        String answer;
+        int answer;
 
         System.out.println("1) Activity type\n" +
                 "2) Above a minimum distance\n" +
                 "3) Type of energy expended\n" +
                 "4) Above a minimum duration");
 
-        answer = keyboard.nextLine();
+        answer = keyboard.nextInt();
+        //SORTING BASED ON ACTIVITY TYPE
+        if (answer == 1) {
+            System.out.println("Based on what activity type would you like to view?\n" +
+                    "1)Cycling\n" +
+                    "2)Running\n" +
+                    "3)Swimming\n");
+            answer = keyboard.nextInt();
+            String typeSelected = "";
+            if (answer == 1) {
+                typeSelected = "Cycling";
+            } else if (answer == 2) {
+                typeSelected = "Running";
+            } else if (answer == 3) {
+                typeSelected = "Swimming";
+            }
+            printHeaders();
+            for (ActivityTracker activity : stats) {
+                if (typeSelected.equals(activity.getType())) {
+                    System.out.printf("%-10s %-8d %-12s %-8.2f %-16.2f %-12s %-15.2f%n",
+                            activity.getType(), activity.getDuration(), activity.getDate(),
+                            activity.getDistance(), activity.getAverageHeartRate(),
+                            activity.getIntensity(), activity.caloriesBurned());
+                }
+            }
+        }
+            //ABOVE MINIMUM DISTANCE SUBSET
 
-        if (answer == "1") {
-            activityType();
-        } else if (answer == "2") {
-            aboveMinimumDistance();
-        } else if (answer == "3") {
+        else if (answer == 2)
+        {
+            double minimumDistance;
+            System.out.println("Please enter the minimum distance for stats to be displayed.");
+            minimumDistance = keyboard.nextDouble();
+            printHeaders();
+            for (ActivityTracker activity : stats) {
+                if(minimumDistance<activity.getDistance())
+                {
+                    System.out.printf("%-10s %-8d %-12s %-8.2f %-16.2f %-12s %-15.2f%n",
+                            activity.getType(), activity.getDuration(), activity.getDate(),
+                            activity.getDistance(), activity.getAverageHeartRate(),
+                            activity.getIntensity(), activity.caloriesBurned());
+                }
+            }
+        }
+
+        else if (answer == 3) {
             energyExpended();
-        } else if (answer == "4") {
-            aboveMinimumDuration();
+        } else if (answer == 4) {
+          //  aboveMinimumDuration();
 
         }
     }
+
+    public static void printHeaders() {
+        System.out.printf("%-10s %-8s %-12s %-8s %-16s %-12s %-15s%n",
+                "Type", "Duration", "Date", "Distance", "Avg Heart Rate", "Intensity", "Calories Burned");
+    }
+
+
 
     public static void overallView() {
         Scanner keyboard = new Scanner(System.in);
@@ -149,33 +211,18 @@ public class Main {
                 "2) Average calories burned");
     }
 
-
-    public static void caloriesBurned(int duration, int kilometresPerHour) {
-        Scanner keyboard = new Scanner(System.in);
-        String answer;
-        String activity;
-        double caloriesBurned;
-        caloriesBurned = duration * kilometresPerHour;
-        //based on what should they view it? activity? - probs
-        System.out.println("Based on what activity do you want to see: Calories Burned?");
-        answer = keyboard.nextLine();
-
-        if (answer == "Swimming") {
-
-            //get only the swimming column (get)
-
-            //sorts in ascending order
-            // Arrays.sort(ARRAY NAME);
-
-            //sorts in reverse order
-            // reverse(ARRAY NAME);
-        } else if (answer == "Cycling") {
-
-        } else if (answer == "Running") {
-
-        } else {
-
+    static class ActivityTrackerComparator implements Comparator<ActivityTracker> {
+        @Override
+        public int compare(ActivityTracker a, ActivityTracker b) {
+            // Sort in reverse order based on caloriesBurned
+            return Double.compare(b.caloriesBurned(), a.caloriesBurned());
         }
+    }
+
+    public static void caloriesBurned()  {
+
+        // Sort the ArrayList in reverse order based on caloriesBurned
+        Collections.sort(stats, new ActivityTrackerComparator());
 
     }
 
@@ -376,22 +423,22 @@ public class Main {
         }
     }
 
-    public static void aboveMinimumDistance(ArrayList<ActivityTracker> stats) {
-        Scanner keyboard = new Scanner(System.in);
-        // Collections.sort(stats);
-        int minDistance = Integer.MAX_VALUE;
-
-        System.out.println("What's your minimum distance requirement?");
-        minDistance = keyboard.nextInt();
-
-        for (int i = 1; i < stats.size(); i++) {
-            if (minDistance > stats.get(i).distance) {
-                //remove the activity, update the arraylist(?) and print it out
-                System.out.println(stats.toString());
-            }
-        }
-
-    }
+//    public static void aboveMinimumDistance(ArrayList<ActivityTracker> stats) {
+//        Scanner keyboard = new Scanner(System.in);
+//        // Collections.sort(stats);
+//        int minDistance = Integer.MAX_VALUE;
+//
+//        System.out.println("What's your minimum distance requirement?");
+//        minDistance = keyboard.nextInt();
+//
+//        for (int i = 1; i < stats.size(); i++) {
+//            if (minDistance > stats.get(i).distance) {
+//                //remove the activity, update the arraylist(?) and print it out
+//                System.out.println(stats.toString());
+//            }
+//        }
+//
+//    }
 
     public static void energyExpended() {
         Scanner keyboard = new Scanner(System.in);
@@ -432,20 +479,20 @@ public class Main {
         System.out.printf("The total energy expenditure is: " + bmr + " kcal.");
     }
 
-    public static void aboveMinimumDuration(ArrayList<ActivityTracker> stats) {
-        Scanner keyboard = new Scanner(System.in);
-        int minDuration = Integer.MAX_VALUE;
-
-        System.out.println("What's your minimum duration requirement?");
-        minDuration = keyboard.nextInt();
-
-        for (int i = 1; i < stats.size(); i++)
-            {
-            if (minDuration >= stats.get(i).duration)
-                {
-                    //remove the activity, update the arraylist(?) and print it out
-                    System.out.println(stats.toString());
-                }
-            }
-    }
+//    public static void aboveMinimumDuration(ArrayList<ActivityTracker> stats) {
+//        Scanner keyboard = new Scanner(System.in);
+//        int minDuration = Integer.MAX_VALUE;
+//
+//        System.out.println("What's your minimum duration requirement?");
+//        minDuration = keyboard.nextInt();
+//
+//        for (int i = 1; i < stats.size(); i++)
+//            {
+//            if (minDuration >= stats.get(i).duration)
+//                {
+//                    //remove the activity, update the arraylist(?) and print it out
+//                    System.out.println(stats.toString());
+//                }
+//            }
+//    }
 }

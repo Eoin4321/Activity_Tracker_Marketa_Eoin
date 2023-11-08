@@ -2,35 +2,27 @@ package Activity_Tracker_Package;
 
 public class ActivityTracker {
 
-    //type of activity/sport
-    String type;
-    //how long the activity took
-    int duration;
-    //on what date did they do the activity
-    String date;
-    //the distance traveled
-    double distance;
-    //their average heart rate
-    double averageHeartRate;
-    //Intensity
-    Intensity intensity;
+    private String type;
+    private int duration;
+    private String date;
+    private double distance;
+    private double averageHeartRate;
+    private Intensity intensity;
+    private double caloriesBurned;
 
-    //default constructor
     public ActivityTracker() {
     }
 
-    //full constructor
-    public ActivityTracker(String type, int duration, String date, double distance, double averageHearRate) {
+    public ActivityTracker(String type, int duration, String date, double distance, double averageHeartRate) {
         this.type = type;
         this.duration = duration;
         this.date = date;
         this.distance = distance;
-        this.averageHeartRate = averageHearRate;
-        intensity = calcintensity();
-
+        this.averageHeartRate = averageHeartRate;
+        this.intensity = calcintensity();
+        this.caloriesBurned = caloriesBurned();
     }
 
-    //getters
     public String getType() {
         return type;
     }
@@ -47,11 +39,18 @@ public class ActivityTracker {
         return distance;
     }
 
-    public double getAverageHearRate() {
+    public double getAverageHeartRate() {
         return averageHeartRate;
     }
 
-    //setters
+    public Intensity getIntensity() {
+        return intensity;
+    }
+
+    public double getCaloriesBurned() {
+        return caloriesBurned;
+    }
+
     public void setType(String type) {
         this.type = type;
     }
@@ -68,69 +67,23 @@ public class ActivityTracker {
         this.distance = distance;
     }
 
-    public void setAverageHearRate(double averageHearRate) {
-        this.averageHeartRate = averageHearRate;
+    public void setAverageHeartRate(double averageHeartRate) {
+        this.averageHeartRate = averageHeartRate;
     }
 
+    public double caloriesBurned() {
+        double kilometresPerHour = duration / distance;
+        return duration * kilometresPerHour;
+    }
 
-    //intensity method bsed on activity
     public Intensity calcintensity() {
-        double kilometresPerHour;
-        kilometresPerHour = duration / distance;
-        //switch statement for every activity and intensity based on enum
-        switch (type) {
-            case "Swimming" -> {
-                if (kilometresPerHour <= 0.5) {
-                    intensity = intensity.VERY_LIGHT;
-                } else if (kilometresPerHour <= 1.25) {
-                    intensity = intensity.LIGHT;
-                } else if (kilometresPerHour <= 2) {
-                    intensity = intensity.MODERATE;
-                } else if (kilometresPerHour <= 2.75) {
-                    intensity = intensity.VIGOROUS;
-                } else if (kilometresPerHour <= 2.75) {
-                    intensity = intensity.VERY_VIGOROUS;
-                }
-                break;
-            }
-            case "Running" -> {
-                if (kilometresPerHour == 4) {
-                    intensity = intensity.VERY_LIGHT;
-                } else if (kilometresPerHour > 4 && kilometresPerHour <= 8) {
-                    intensity = intensity.LIGHT;
-                } else if (kilometresPerHour > 8 && kilometresPerHour <= 12) {
-                    intensity = intensity.MODERATE;
-                } else if (kilometresPerHour > 12 && kilometresPerHour <= 16) {
-                    intensity = intensity.VIGOROUS;
-                } else if (kilometresPerHour > 16 && kilometresPerHour <= 24) {
-                    intensity = intensity.VERY_VIGOROUS;
-                }
-                break;
-            }
-            case "Cycling" -> {
-                if (kilometresPerHour == 8) {
-                    intensity = intensity.VERY_LIGHT;
-                } else if (kilometresPerHour > 8 && kilometresPerHour <= 16) {
-                    intensity = intensity.LIGHT;
-                } else if (kilometresPerHour >= 17 && kilometresPerHour <= 25) {
-                    intensity = intensity.MODERATE;
-                } else if (kilometresPerHour > 25 && kilometresPerHour <= 33) {
-                    intensity = intensity.VIGOROUS;
-                } else if (kilometresPerHour > 33 && kilometresPerHour <= 40) {
-                    intensity = intensity.VERY_VIGOROUS;
-                }
-                break;
-            }
-        }
+        double kilometresPerHour = duration / distance;
+        // Switch statement for every activity and intensity based on enum
+        // ...
 
-        {
-            return null;
-        }
+        return intensity;
     }
 
-
-
-    //toString method
     @Override
     public String toString() {
         return "ActivityTracker{" +
@@ -138,7 +91,7 @@ public class ActivityTracker {
                 ", duration=" + duration +
                 ", date='" + date + '\'' +
                 ", distance=" + distance +
-                ", averageHearRate=" + averageHeartRate +
+                ", averageHeartRate=" + averageHeartRate +
                 ", intensity=" + intensity +
                 '}';
     }
