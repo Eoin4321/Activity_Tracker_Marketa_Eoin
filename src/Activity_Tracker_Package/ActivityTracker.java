@@ -1,5 +1,6 @@
 package Activity_Tracker_Package;
-
+import java.time.LocalDate;
+import java.util.Date;
 public class ActivityTracker {
 
     private String type;
@@ -13,14 +14,14 @@ public class ActivityTracker {
     public ActivityTracker() {
     }
 
-    public ActivityTracker(String type, int duration, String date, double distance, double averageHeartRate) {
+    public ActivityTracker(String type, int duration, String date, double distance, double averageHeartRate, Intensity intensity, double caloriesBurned) {
         this.type = type;
         this.duration = duration;
         this.date = date;
         this.distance = distance;
         this.averageHeartRate = averageHeartRate;
-        this.intensity = calcintensity();
-        this.caloriesBurned = caloriesBurned();
+        this.intensity = intensity;
+        this.caloriesBurned = caloriesBurned;
     }
 
     public String getType() {
@@ -61,6 +62,14 @@ public class ActivityTracker {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public void setIntensity(Intensity intensity) {
+        this.intensity = intensity;
+    }
+
+    public void setCaloriesBurned(double caloriesBurned) {
+        this.caloriesBurned = caloriesBurned;
     }
 
     public void setDistance(double distance) {
@@ -127,7 +136,35 @@ public class ActivityTracker {
         return intensity;
     }
 
-    @Override
+    public static void main(String[] args) {
+        String myStr1 = "Hello";
+        String myStr2 = "Hello";
+        System.out.println(myStr1.compareTo(myStr2)); // Returns 0 because they are equal
+    }
+
+//    public static void{
+//        // storing input in variable
+//        int n = 4;
+//
+//        // create string array called names
+//        String names[]
+//                = { "Rahul", "Ajay", "Gourav", "Riya" };
+//        String temp;
+//        for (int i = 0; i < n; i++) {
+//            for (int j = i + 1; j < n; j++) {
+//
+//                // to compare one string with other strings
+//                if (names[i].compareTo(names[j]) > 0) {
+//                    // swapping
+//                    temp = names[i];
+//                    names[i] = names[j];
+//                    names[j] = temp;
+//                }
+//            }
+//        }
+//    }
+
+
     public String toString() {
         return "ActivityTracker{" +
                 "type='" + type + '\'' +
