@@ -5,7 +5,6 @@ public class ActivityTracker {
 
     private String type;
     private int duration;
-
     private Date date;
     private double distance;
     private double averageHeartRate;
