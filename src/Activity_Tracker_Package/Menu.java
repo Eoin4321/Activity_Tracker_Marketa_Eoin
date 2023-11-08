@@ -11,33 +11,59 @@ import java.util.Scanner;
 import static Activity_Tracker_Package.Intensity.*;
 import static Activity_Tracker_Package.Main.stats;
 
+
 public class Menu {
+    //method designed to read data from the csv file
     public static void fileReader() throws Exception {
-        System.out.println("Please enter the name of the file you would like to add!");
+        //creates scanner so that it can read the input
         Scanner keyboard = new Scanner(System.in);
         //Creating a string called filename which the user will input the name of the file into
         String filename;
-        filename = keyboard.next();
+
+        //prompts the user to enter the name of the file they want to read
+        System.out.println("Please enter the name of the file you would like to add!");
+            filename = keyboard.next();
+
         //Chosing the file the user inputed
         Scanner sc = new Scanner(new File("src\\TestData\\" + filename + ".csv"));
+
+        //adds commas to separate things up
         sc.useDelimiter(",");
+
+        //creates simpledateformat object to make dates in the format below
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+        //variables
         String type;
         int duration;
         Date date;
         double distance;
         double averageHeartRate;
         String value;
-        System.out.println(sc.nextLine());
+
+        //prints the first line of the csv line
+        //System.out.println(sc.nextLine());
+
+        //starts loop that will keep on printing lines from the csv file as long there are some
         while (sc.hasNext()) {
+
+            //reads the activity type and trims any trailing whitespace if there's any
             type = sc.next().trim();
+
             date = null;
+
+            //reads the date as a string and gets rid of any trailing whitespace
             try {
+                //after it tries to parse it into a date object using the specified date format
                 date = dateFormat.parse(sc.next().trim());
-            } catch (ParseException e) {
+            }
+
+
+            catch (ParseException e) {
                 System.out.println("Date not found");
             }
 
+            //same for this, it reads it, gets rid of whitespace, and converts it to the right data types
             value = sc.next().trim();
             duration = Integer.parseInt(value);
             value = sc.next().trim();
@@ -47,53 +73,71 @@ public class Menu {
 
             // Add the newActivity object to the stats ArrayList
             stats.add(new ActivityTracker(type, duration, date, distance, averageHeartRate));
-            System.out.println("PRINT STATS"+stats);
+                                            //System.out.println("PRINT STATS"+stats);
 //            if (!stats.contains(newActivity)) {
 //                stats.add(newActivity);
 //            }
         }
-        System.out.println(stats);
+                                     //System.out.println(stats);
+        //closes the scanner
         sc.close();
+        //displays menu so that the user can interact with it further
         displayMenu();
     }
 
+    //menu that the user can interact with^^
     public static void displayMenu() {
         int menuNum;
         Scanner keyboard = new Scanner(System.in);
-//the menu
+
+        //the menu
         System.out.println("Welcome!");
         System.out.println("Menu");
         System.out.println("1) View files\n");
         System.out.println("2) Upload files");
         System.out.println("(to navigate around the menu please type in number)");
-        menuNum= keyboard.nextInt();
+            //stores the user's input
+            menuNum= keyboard.nextInt();
+
 //if user types in 1 it will bring them to the viewFile method to view the files
         if (menuNum == 1) {
             viewFile();
         }
 //if 2 it will bring them to the fileReader where the user can upload a new file
-        else if (menuNum == 2) {
-            try {
-                fileReader();
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+        else if (menuNum == 2)
+            {
+                try
+                    {
+                        fileReader();
+                    }
+
+                catch (Exception e)
+                    {
+                        throw new RuntimeException(e);
+                    }
             }
-        }
     }
 
     //viewing file method - an array list of how many files the user uploaded
     public static void viewFile() {
         Scanner keyboard = new Scanner(System.in);
         int answer;
+
         //view the file by default
         System.out.println("How do you want to view the file?");
         System.out.println("1) Default\n");
         System.out.println("3) Overall Performance");
-        answer = keyboard.nextInt();
+        //stores user's input
+            answer = keyboard.nextInt();
 
-        if (answer == 1) {
+
+        if (answer == 1)
+        {
             defaultView();
-        } else if (answer == 3) {
+        }
+
+        else if (answer == 3)
+        {
             overallView();
         }
     }
