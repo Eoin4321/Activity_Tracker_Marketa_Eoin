@@ -77,10 +77,53 @@ public class ActivityTracker {
     }
 
     public Intensity calcintensity() {
-        double kilometresPerHour = duration / distance;
-        // Switch statement for every activity and intensity based on enum
-        // ...
-
+        double kilometresPerHour;
+        kilometresPerHour =  (distance/duration)*60 ;
+        //switch statement for every activity and intensity based on enum
+        switch (type) {
+            case "Swimming" -> {
+                if (kilometresPerHour <= 0.5) {
+                    intensity = intensity.VERY_LIGHT;
+                } else if (kilometresPerHour <= 1.25) {
+                    intensity = intensity.LIGHT;
+                } else if (kilometresPerHour <= 2) {
+                    intensity = intensity.MODERATE;
+                } else if (kilometresPerHour <= 2.75) {
+                    intensity = intensity.VIGOROUS;
+                } else if (kilometresPerHour >= 2.75) {
+                    intensity = intensity.VERY_VIGOROUS;
+                }
+                break;
+            }
+            case "Running" -> {
+                if (kilometresPerHour <= 4) {
+                    intensity = intensity.VERY_LIGHT;
+                } else if (kilometresPerHour > 4 && kilometresPerHour <= 8) {
+                    intensity = intensity.LIGHT;
+                } else if (kilometresPerHour > 8 && kilometresPerHour <= 12) {
+                    intensity = intensity.MODERATE;
+                } else if (kilometresPerHour > 12 && kilometresPerHour <= 16) {
+                    intensity = intensity.VIGOROUS;
+                } else if (kilometresPerHour > 16 ) {
+                    intensity = intensity.VERY_VIGOROUS;
+                }
+                break;
+            }
+            case "Cycling" -> {
+                if (kilometresPerHour <= 8) {
+                    intensity = intensity.VERY_LIGHT;
+                } else if (kilometresPerHour > 8 && kilometresPerHour <= 16) {
+                    intensity = intensity.LIGHT;
+                } else if (kilometresPerHour >= 17 && kilometresPerHour <= 25) {
+                    intensity = intensity.MODERATE;
+                } else if (kilometresPerHour > 25 && kilometresPerHour <= 33) {
+                    intensity = intensity.VIGOROUS;
+                } else if (kilometresPerHour > 33 ) {
+                    intensity = intensity.VERY_VIGOROUS;
+                }
+                break;
+            }
+        }
         return intensity;
     }
 

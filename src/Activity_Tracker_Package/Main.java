@@ -7,6 +7,8 @@ import java.util.Collections;
 import java.util.Scanner;
 import java.util.Comparator;
 
+import static Activity_Tracker_Package.Intensity.*;
+
 public class Main {
 
     //creating our ArrayList for ActivityTracker Objects
@@ -125,7 +127,7 @@ public class Main {
         } else if (answer == 3) {
             activityDuration();
         } else if (answer == 4) {
-            activityType();
+            //activityType();
         } else if (answer == 5) {
             distance();
         }
@@ -145,20 +147,9 @@ public class Main {
 
         answer = keyboard.nextInt();
         //SORTING BASED ON ACTIVITY TYPE
-        if (answer == 1) {
-            System.out.println("Based on what activity type would you like to view?\n" +
-                    "1)Cycling\n" +
-                    "2)Running\n" +
-                    "3)Swimming\n");
-            answer = keyboard.nextInt();
-            String typeSelected = "";
+        String typeSelected = "";
             if (answer == 1) {
-                typeSelected = "Cycling";
-            } else if (answer == 2) {
-                typeSelected = "Running";
-            } else if (answer == 3) {
-                typeSelected = "Swimming";
-            }
+            typeSelected=selectType();
             printHeaders();
             for (ActivityTracker activity : stats) {
                 if (typeSelected.equals(activity.getType())) {
@@ -188,11 +179,59 @@ public class Main {
             }
         }
 
-        else if (answer == 3) {
-            energyExpended();
-        } else if (answer == 4) {
-          //  aboveMinimumDuration();
+        //TYPE OF ENERGY EXPANDED
 
+        else if (answer == 3) {
+            Intensity intensityInput=null;
+            System.out.println("Based on what type of energy expaned would you like to view?\n" +
+                    "1)Very Light\n" +
+                    "2)Light\n" +
+                    "3)Moderate\n"+
+                    "2)Vigorous\n" +
+                    "2)Very_Vigorous\n");
+            answer = keyboard.nextInt();
+            if (answer == 1) {
+                intensityInput = VERY_LIGHT;
+            } else if (answer == 2) {
+                intensityInput = LIGHT;
+            } else if (answer == 3) {
+                intensityInput = MODERATE;
+            }
+            else if (answer == 4) {
+                intensityInput = VIGOROUS;
+             }
+            else if (answer == 5) {
+                intensityInput = VERY_VIGOROUS;
+            }
+
+            printHeaders();
+            for (ActivityTracker activity : stats) {
+                if (intensityInput==activity.getIntensity()) {
+                    System.out.printf("%-10s %-8d %-12s %-8.2f %-16.2f %-12s %-15.2f%n",
+                            activity.getType(), activity.getDuration(), activity.getDate(),
+                            activity.getDistance(), activity.getAverageHeartRate(),
+                            activity.getIntensity(), activity.caloriesBurned());
+                }
+            }
+
+
+        }
+        //ABOVE A MINIMUM DURATION
+        else if(answer==4) {
+            {
+                double minimumInput;
+                System.out.println("Please enter the minimum distance for stats to be displayed.");
+                minimumInput = keyboard.nextDouble();
+                printHeaders();
+                for (ActivityTracker activity : stats) {
+                    if (minimumInput < activity.getDuration()) {
+                        System.out.printf("%-10s %-8d %-12s %-8.2f %-16.2f %-12s %-15.2f%n",
+                                activity.getType(), activity.getDuration(), activity.getDate(),
+                                activity.getDistance(), activity.getAverageHeartRate(),
+                                activity.getIntensity(), activity.caloriesBurned());
+                    }
+                }
+            }
         }
     }
 
@@ -202,14 +241,21 @@ public class Main {
     }
 
 
-
     public static void overallView() {
-        Scanner keyboard = new Scanner(System.in);
-        String answer;
+        String activityInput=selectType();
 
+        Scanner keyboard = new Scanner(System.in);
+        int answer;
         System.out.println("1) Average distance per activity\n" +
                 "2) Average calories burned");
+        answer = keyboard.nextInt();
+        if(answer==1)
+        {
+            averageDistancePerActivity(activityInput);
+        }
     }
+
+
 
     static class ActivityTrackerComparator implements Comparator<ActivityTracker> {
         @Override
@@ -403,24 +449,76 @@ public class Main {
         }
     }
 
-    public static void activityType() {
+    public static String activityType() {
         Scanner keyboard = new Scanner(System.in);
-        String answer;
-
+        int answer;
         //based on what should they view it? activity? - probs
-        System.out.println("Based on what activity do you want to see: Type of Activity?");
-        answer = keyboard.nextLine();
-
-        if (answer == "Swimming") {
-
-            //get only the swimming column (get)
-            //printout
-
-        } else if (answer == "Running") {
-
-        } else if (answer == "Cycling") {
-
+        System.out.println("Based on what activity type would you like to view?\n" +
+                "1)Cycling\n" +
+                "2)Running\n" +
+                "3)Swimming\n");
+        answer = keyboard.nextInt();
+        String typeSelected = "";
+        if (answer == 1) {
+            answer = keyboard.nextInt();
+            if (answer == 1) {
+                typeSelected = "Cycling";
+            } else if (answer == 2) {
+                typeSelected = "Running";
+            } else if (answer == 3) {
+                typeSelected = "Swimming";
+            }
         }
+        return typeSelected;
+    }
+
+    public static void averageDistancePerActivity(String typeSelected)
+    {
+        System.out.println("AVERAGEDISTANCEPERACTITIVITY METHOD RUNNING");
+        double average=0;
+        int count=0;
+        for (ActivityTracker activity : stats) {
+            System.out.println("TEST FOR LOOP RUNING");
+            if (typeSelected.equals(activity.getType())) {
+                count++;
+                average=average+activity.getDistance();
+                System.out.println("TEST CURRENT AVERAGE IN FOR LOOP=" +average);
+            }
+            average=average/count;
+        }
+        System.out.println("TEST Average = " +average);
+        averageDistancePrintInformation(average,typeSelected);
+    }
+
+    public static void averageDistancePrintInformation(double average, String typeSelected)
+    {
+        printHeaders();
+        System.out.println("TYPE =" + typeSelected);
+        System.out.println("Average =" + average);
+        //System.out.printf("%-10s %-8sn %-10d %-8sf" ,"Type","Average Distance",average,typeSelected);
+        System.out.println("AVERAGE DISTANCE PRINT INFORMATION RUNNING");
+
+    }
+
+    public static String selectType() {
+        Scanner keyboard = new Scanner(System.in);
+        int answer = 1;
+        String typeSelected = "";
+        if (answer == 1) {
+            System.out.println("Based on what activity type would you like to view?\n" +
+                    "1)Cycling\n" +
+                    "2)Running\n" +
+                    "3)Swimming\n");
+            answer = keyboard.nextInt();
+            if (answer == 1) {
+                typeSelected = "Cycling";
+            } else if (answer == 2) {
+                typeSelected = "Running";
+            } else if (answer == 3) {
+                typeSelected = "Swimming";
+            }
+        }
+        return typeSelected;
     }
 
 //    public static void aboveMinimumDistance(ArrayList<ActivityTracker> stats) {
