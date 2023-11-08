@@ -3,12 +3,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.io.File;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.Scanner;
+import java.util.*;
 
 import static Activity_Tracker_Package.Intensity.*;
+import static Activity_Tracker_Package.Main.sortduration;
 import static Activity_Tracker_Package.Main.stats;
 
 public class Menu {
@@ -88,12 +86,37 @@ public class Menu {
         //view the file by default
         System.out.println("How do you want to view the file?");
         System.out.println("1) Default\n");
+        System.out.println("2) Search by Binary");
         System.out.println("3) Overall Performance");
         answer = keyboard.nextInt();
 
         if (answer == 1) {
             defaultView();
-        } else if (answer == 3) {
+        }
+        else if (answer==2)
+            {
+                sortduration();
+                ReverseArray();
+
+                ArrayList<Integer> durations = new ArrayList<>();
+
+                for (ActivityTracker activity : stats){
+                    int duration = activity.getDuration();
+                    durations.add(duration);
+                }
+                System.out.println("Please type in the duration you are looking for");
+                answer= keyboard.nextInt();
+                int index = Collections.binarySearch(durations, answer);
+                if(index<0)
+                {
+                    System.out.println(index);
+                    System.out.println("Number not found");
+                }
+                else {
+                    System.out.println("The index of this duration is " + index);
+                }
+            }
+        else if (answer == 3) {
             overallView();
         }
     }
@@ -567,6 +590,11 @@ public class Menu {
         }
 
         System.out.printf("The total energy expenditure is: " + bmr + " kcal.");
+    }
+
+    public static void ReverseArray()
+    {
+        Collections.reverse(stats);
     }
 
 
