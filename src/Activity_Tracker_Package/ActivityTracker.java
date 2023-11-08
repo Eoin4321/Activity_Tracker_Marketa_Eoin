@@ -11,6 +11,7 @@ public class ActivityTracker {
     private Intensity intensity;
     private double caloriesBurned;
 
+    //full constructor
     public ActivityTracker(String type, int duration, String date, double distance, double averageHeartRate) {
         this.type = type;
         this.duration = duration;
@@ -22,7 +23,7 @@ public class ActivityTracker {
     }
 
 
-
+//getters
     public String getType() {
         return type;
     }
@@ -51,6 +52,8 @@ public class ActivityTracker {
         return caloriesBurned;
     }
 
+
+    //setters
     public void setType(String type) {
         this.type = type;
     }
@@ -79,15 +82,24 @@ public class ActivityTracker {
         this.averageHeartRate = averageHeartRate;
     }
 
+
+
+    //calories burned method
     public double caloriesBurned() {
+        //calculates kilometres per hour first = intensity
         double kilometresPerHour = duration / distance;
+
+        //and to get how many calories the user has burned it will multiply it by duration
         return duration * kilometresPerHour;
     }
 
+    //intensity method
     public Intensity calcintensity() {
         double kilometresPerHour;
+        //kilometres per hour formula
         kilometresPerHour =  (distance/duration)*60 ;
         //switch statement for every activity and intensity based on enum
+        //based on the content from the tables in ca1 brief
         switch (type) {
             case "Swimming" -> {
                 if (kilometresPerHour <= 0.5) {
@@ -135,10 +147,13 @@ public class ActivityTracker {
         return intensity;
     }
 
+    //compares two strings lexicographically
     public static void main(String[] args) {
         String myStr1 = "Hello";
         String myStr2 = "Hello";
-        System.out.println(myStr1.compareTo(myStr2)); // Returns 0 because they are equal
+
+        // returns 0 because they are equal
+        System.out.println(myStr1.compareTo(myStr2));
     }
 
 //    public static void{
@@ -163,7 +178,7 @@ public class ActivityTracker {
 //        }
 //    }
 
-
+    //toString method
     public String toString() {
         return "ActivityTracker{" +
                 "type='" + type + '\'' +
