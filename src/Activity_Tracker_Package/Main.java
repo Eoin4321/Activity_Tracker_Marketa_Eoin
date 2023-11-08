@@ -43,13 +43,18 @@ public class Main {
         }
     }
 
-
-    static class ActivityTrackerComparator3 implements Comparator<ActivityTracker> {
+    static class ActivityTrackerComparatorDate implements Comparator<ActivityTracker> {
         @Override
         public int compare(ActivityTracker a, ActivityTracker b) {
-            // Sort in descending order based on date
-            return CharSequence.compare(b.getDate(), a.getDate());
+            // Sort in descending order based on caloriesBurned
+            return b.getDate().compareTo(a.getDate()) ;
         }
+    }
+
+    public static void SortDate()  {
+
+        // Sort the ArrayList in descending order based on caloriesBurned
+        Collections.sort(stats, new Main.ActivityTrackerComparatorDate());
     }
 
     public static void caloriesBurned()  {
@@ -63,8 +68,4 @@ public class Main {
         Collections.sort(stats, new Main.ActivityTrackerComparator2());
     }
 
-    public static void sortdates()  {
-        // Sort the ArrayList in descending order based on caloriesBurned
-        Collections.sort(stats, new Main.ActivityTrackerComparator3());
-    }
 }

@@ -5,13 +5,14 @@ public class ActivityTracker {
 
     private String type;
     private int duration;
-    private String date;
+
+    private Date date;
     private double distance;
     private double averageHeartRate;
     private Intensity intensity;
     private double caloriesBurned;
 
-    public ActivityTracker(String type, int duration, String date, double distance, double averageHeartRate) {
+    public ActivityTracker(String type, int duration, Date date, double distance, double averageHeartRate) {
         this.type = type;
         this.duration = duration;
         this.date = date;
@@ -31,7 +32,7 @@ public class ActivityTracker {
         return duration;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
@@ -59,7 +60,7 @@ public class ActivityTracker {
         this.duration = duration;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

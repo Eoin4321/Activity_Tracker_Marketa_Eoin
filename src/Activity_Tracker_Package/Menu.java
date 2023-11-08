@@ -1,9 +1,11 @@
 package Activity_Tracker_Package;
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.Scanner;
 
 import static Activity_Tracker_Package.Intensity.*;
@@ -19,17 +21,23 @@ public class Menu {
         //Chosing the file the user inputed
         Scanner sc = new Scanner(new File("src\\TestData\\" + filename + ".csv"));
         sc.useDelimiter(",");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String type;
         int duration;
-        String date;
+        Date date;
         double distance;
         double averageHeartRate;
         String value;
         System.out.println(sc.nextLine());
         while (sc.hasNext()) {
             type = sc.next().trim();
+            date = null;
+            try {
+                date = dateFormat.parse(sc.next().trim());
+            } catch (ParseException e) {
+                System.out.println("Date not found");
+            }
 
-            date = sc.next().trim();
             value = sc.next().trim();
             duration = Integer.parseInt(value);
             value = sc.next().trim();
@@ -103,7 +111,7 @@ public class Menu {
             System.out.println("Running CaloriesBurned Method");
             Main.caloriesBurned();
         } else if (answer == 2) {
-            Main.sortdates();
+           // Main.sortdates();
         } else if (answer == 3) {
             Main.sortduration();
         } else if (answer == 4) {
@@ -560,6 +568,8 @@ public class Menu {
 
         System.out.printf("The total energy expenditure is: " + bmr + " kcal.");
     }
+
+
 
 }
 
