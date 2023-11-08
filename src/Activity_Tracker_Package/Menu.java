@@ -132,7 +132,7 @@ public class Menu {
         String typeSelected = "";
         if (answer == 1) {
             typeSelected=selectType();
-            printHeaders();
+            anonymousinnerclasses.printHeaders();
             for (ActivityTracker activity : stats) {
                 if (typeSelected.equals(activity.getType())) {
                     System.out.printf("%-10s %-8d %-12s %-8.2f %-16.2f %-12s %-15.2f%n",
@@ -149,7 +149,7 @@ public class Menu {
             double minimumDistance;
             System.out.println("Please enter the minimum distance for stats to be displayed.");
             minimumDistance = keyboard.nextDouble();
-            printHeaders();
+            anonymousinnerclasses.printHeaders();
             for (ActivityTracker activity : stats) {
                 if(minimumDistance<activity.getDistance())
                 {
@@ -186,7 +186,7 @@ public class Menu {
                 intensityInput = VERY_VIGOROUS;
             }
 
-            printHeaders();
+            anonymousinnerclasses.printHeaders();
             for (ActivityTracker activity : stats) {
                 if (intensityInput==activity.getIntensity()) {
                     System.out.printf("%-10s %-8d %-12s %-8.2f %-16.2f %-12s %-15.2f%n",
@@ -204,7 +204,7 @@ public class Menu {
                 double minimumInput;
                 System.out.println("Please enter the minimum distance for stats to be displayed.");
                 minimumInput = keyboard.nextDouble();
-                printHeaders();
+                anonymousinnerclasses.printHeaders();
                 for (ActivityTracker activity : stats) {
                     if (minimumInput < activity.getDuration()) {
                         System.out.printf("%-10s %-8d %-12s %-8.2f %-16.2f %-12s %-15.2f%n",
@@ -217,10 +217,11 @@ public class Menu {
         }
     }
 
-    public static void printHeaders() {
-        System.out.printf("%-10s %-8s %-12s %-8s %-16s %-12s %-15s%n",
-                "Type", "Duration", "Date", "Distance", "Avg Heart Rate", "Intensity", "Calories Burned");
-    }
+    //OLD CODE FOR PRINTING HEADERS. REPLACED IT WITH AN ANONYMUS INNER CLASS.
+//    public static void printHeaders() {
+//        System.out.printf("%-10s %-8s %-12s %-8s %-16s %-12s %-15s%n",
+//                "Type", "Duration", "Date", "Distance", "Avg Heart Rate", "Intensity", "Calories Burned");
+//    }
 
 
     public static void overallView() {
@@ -469,12 +470,11 @@ public class Menu {
 
     public static void averageDistancePrintInformation(double average, String typeSelected)
     {
-        printHeaders();
+        anonymousinnerclasses.printHeaders();
         System.out.println("TYPE =" + typeSelected);
         System.out.println("Average =" + average);
         //System.out.printf("%-10s %-8sn %-10d %-8sf" ,"Type","Average Distance",average,typeSelected);
         System.out.println("AVERAGE DISTANCE PRINT INFORMATION RUNNING");
-
     }
 
     //SELECT TYPE METHOD
