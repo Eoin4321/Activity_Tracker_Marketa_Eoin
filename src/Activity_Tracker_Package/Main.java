@@ -253,6 +253,10 @@ public class Main {
         {
             averageDistancePerActivity(activityInput);
         }
+        else if(answer==2)
+        {
+            caloriesBurnedAverage();
+        }
     }
 
 
@@ -519,6 +523,21 @@ public class Main {
             }
         }
         return typeSelected;
+    }
+
+    public static void caloriesBurnedAverage()
+    {
+        double average=0;
+        int count=0;
+        for (ActivityTracker activity : stats) {
+            System.out.println("TEST FOR LOOP RUNING");
+                count++;
+                average=average+activity.getDistance();
+                System.out.println("TEST CURRENT AVERAGE IN FOR LOOP=" +average);
+            average=average/count;
+        }
+        System.out.println("The average of calories burned is " +average);
+
     }
 
 //    public static void aboveMinimumDistance(ArrayList<ActivityTracker> stats) {
