@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Scanner;
-inport java.text.SimpleDateFormat;
 
 import static Activity_Tracker_Package.Intensity.*;
 import static Activity_Tracker_Package.Main.stats;
@@ -22,7 +21,7 @@ public class Menu {
         sc.useDelimiter(",");
         String type;
         int duration;
-        Date date;
+        String date;
         double distance;
         double averageHeartRate;
         String value;
@@ -30,13 +29,7 @@ public class Menu {
         while (sc.hasNext()) {
             type = sc.next().trim();
 
-            value = sc.next().trim();
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            String date = sdf.format(new Date());
-            System.out.println(date);
-
-
-            date =
+            date = sc.next().trim();
             value = sc.next().trim();
             duration = Integer.parseInt(value);
             value = sc.next().trim();
@@ -84,7 +77,6 @@ public class Menu {
     public static void viewFile() {
         Scanner keyboard = new Scanner(System.in);
         int answer;
-        System.out.println("Loading...");
         //view the file by default
         System.out.println("How do you want to view the file?");
         System.out.println("1) Default\n");
@@ -117,7 +109,7 @@ public class Menu {
         } else if (answer == 3) {
             activityDuration();
         } else if (answer == 4) {
-            //activityType();
+            AlphabeticallyType();
         } else if (answer == 5) {
             distance();
         }
@@ -522,6 +514,13 @@ public class Menu {
         System.out.println("The average of calories burned is " +average);
 
     }
+
+    public static void AlphabeticallyType()
+    {
+        //Using a lambda expression to sort the arraylist in alphabetical order.
+        Collections.sort(stats, (activity1, activity2) -> activity1.getType().compareTo(activity2.getType()));
+    }
+
 
 
     //ENERGY EXPANDED OTHER WAY

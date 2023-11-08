@@ -11,10 +11,7 @@ public class ActivityTracker {
     private Intensity intensity;
     private double caloriesBurned;
 
-    public ActivityTracker() {
-    }
-
-    public ActivityTracker(String type, int duration, String date, double distance, double averageHeartRate, Intensity intensity, double caloriesBurned) {
+    public ActivityTracker(String type, int duration, String date, double distance, double averageHeartRate) {
         this.type = type;
         this.duration = duration;
         this.date = date;
@@ -23,6 +20,8 @@ public class ActivityTracker {
         this.intensity = intensity;
         this.caloriesBurned = caloriesBurned;
     }
+
+
 
     public String getType() {
         return type;

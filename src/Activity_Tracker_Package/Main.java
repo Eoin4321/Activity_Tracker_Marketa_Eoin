@@ -41,5 +41,4 @@ public class Main {
         Collections.sort(stats, new Main.ActivityTrackerComparator());
 
     }
-
 }
