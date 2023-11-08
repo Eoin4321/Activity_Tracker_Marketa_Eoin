@@ -25,6 +25,9 @@ public class BinarySearch {
     }
 }
 
+// negative comes before
+// zero is equal
+// positive is after
 
 
 //code for binary search taken from: https://www.javatpoint.com/binary-search-in-java on the 8.11.2023
