@@ -348,7 +348,6 @@ public class Menu {
         //Taking average and type selected to print them
         public static void averageDistancePrintInformation ( double average, String typeSelected)
         {
-            anonymousinnerclasses.printHeaders();
             System.out.println("TYPE =" + typeSelected);
             System.out.println("Average =" + average);
             //System.out.printf("%-10s %-8sn %-10d %-8sf" ,"Type","Average Distance",average,typeSelected);
