@@ -1,13 +1,11 @@
 package Activity_Tracker_Package;
 //Importing
 
-import java.io.File;
+
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Scanner;
 import java.util.Comparator;
 
-import static Activity_Tracker_Package.Intensity.*;
 
 public class Main {
 
@@ -21,59 +19,70 @@ public class Main {
             //calls the fileReader() method from the Menu class
             Menu.fileReader();
         }
-            //if an exception occurs during the file reading it is rethrown as a RunTimeException
+            //if an exception occurs during the file reading it is rerun
             catch (Exception e) {
             throw new RuntimeException(e);
         }
-        //prints the contents of the stats arraylist
-        System.out.println(stats);
+        //Running the menu method
+        Menu.displayMenu();
+
 
     }
 
-    //nested static class that implements the comparator interface for activitytracker objects
+    //CaloriesBurned method
+    //Creating a comparator class based on the activityTracker object
     static class ActivityTrackerComparator implements Comparator<ActivityTracker> {
-       //overrides the compare method
+
+        //Instead of calling the regular method it will call this one
         @Override
+        //Comparing both stats
         public int compare(ActivityTracker a, ActivityTracker b) {
-            // Sort in descending order based on caloriesBurned
+            //Returing them in descending order
             return Double.compare(b.caloriesBurned(), a.caloriesBurned());
         }
     }
 
-    // -,,-
+    //Duration method
     static class ActivityTrackerComparator2 implements Comparator<ActivityTracker> {
         @Override
         public int compare(ActivityTracker a, ActivityTracker b) {
-            // Sort in descending order based on duration
             return Double.compare(b.getDuration(), a.getDuration());
         }
     }
 
-    //-,,-
+    //Distance method
+    static class ActivityTrackerComparator3 implements Comparator<ActivityTracker> {
+        @Override
+        public int compare(ActivityTracker a, ActivityTracker b) {
+            return Double.compare(b.getDistance(), a.getDistance());
+        }
+    }
+
+    //Date method
     static class ActivityTrackerComparatorDate implements Comparator<ActivityTracker> {
         @Override
         public int compare(ActivityTracker a, ActivityTracker b) {
-            // overrides the compare method to sort the objects based on their dates
             return b.getDate().compareTo(a.getDate()) ;
         }
     }
 
 
-    public static void SortDate()  {
 
-        // Sort the ArrayList based on the dates of activitytracker object
+    //Sorting based on numbers returned in the comparator
+    public static void SortDate()  {
         Collections.sort(stats, new Main.ActivityTrackerComparatorDate());
     }
 
     public static void caloriesBurned()  {
-
-        // Sort the ArrayList in descending order based on caloriesBurned
         Collections.sort(stats, new Main.ActivityTrackerComparator());
     }
 
     public static void sortduration()  {
-        // sorts the arraylist based on the durations of activitytracker objects
         Collections.sort(stats, new Main.ActivityTrackerComparator2());
+    }
+
+    public static void sortdistance()  {
+        Collections.sort(stats, new Main.ActivityTrackerComparator3());
     }
 
 }

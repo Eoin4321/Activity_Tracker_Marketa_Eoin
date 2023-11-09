@@ -1,3 +1,4 @@
+//UNUSED BINARY SEARCH CODE.
 //package Activity_Tracker_Package;
 //import java.util.ArrayList;
 //import java.util.Arrays;

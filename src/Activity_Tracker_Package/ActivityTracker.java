@@ -3,6 +3,7 @@ import java.time.LocalDate;
 import java.util.Date;
 public class ActivityTracker {
 
+    //Setting up variables
     private String type;
     private int duration;
     private Date date;
@@ -11,18 +12,19 @@ public class ActivityTracker {
     private Intensity intensity;
     private double caloriesBurned;
 
+    //Constructor
     public ActivityTracker(String type, int duration, Date date, double distance, double averageHeartRate) {
         this.type = type;
         this.duration = duration;
         this.date = date;
         this.distance = distance;
         this.averageHeartRate = averageHeartRate;
-        this.intensity = intensity;
-        this.caloriesBurned = caloriesBurned;
+        this.intensity = calcintensity();
+        this.caloriesBurned = caloriesBurned();
     }
 
 
-
+    //Getters
     public String getType() {
         return type;
     }
@@ -51,6 +53,7 @@ public class ActivityTracker {
         return caloriesBurned;
     }
 
+    //Setters
     public void setType(String type) {
         this.type = type;
     }
@@ -79,11 +82,13 @@ public class ActivityTracker {
         this.averageHeartRate = averageHeartRate;
     }
 
+    //CaloriesBurned calculation method
     public double caloriesBurned() {
         double kilometresPerHour = duration / distance;
         return duration * kilometresPerHour;
     }
 
+    //Calc intensity method
     public Intensity calcintensity() {
         double kilometresPerHour;
         kilometresPerHour =  (distance/duration)*60 ;
@@ -134,35 +139,6 @@ public class ActivityTracker {
         }
         return intensity;
     }
-
-    public static void main(String[] args) {
-        String myStr1 = "Hello";
-        String myStr2 = "Hello";
-        System.out.println(myStr1.compareTo(myStr2)); // Returns 0 because they are equal
-    }
-
-//    public static void{
-//        // storing input in variable
-//        int n = 4;
-//
-//        // create string array called names
-//        String names[]
-//                = { "Rahul", "Ajay", "Gourav", "Riya" };
-//        String temp;
-//        for (int i = 0; i < n; i++) {
-//            for (int j = i + 1; j < n; j++) {
-//
-//                // to compare one string with other strings
-//                if (names[i].compareTo(names[j]) > 0) {
-//                    // swapping
-//                    temp = names[i];
-//                    names[i] = names[j];
-//                    names[j] = temp;
-//                }
-//            }
-//        }
-//    }
-
 
     public String toString() {
         return "ActivityTracker{" +
